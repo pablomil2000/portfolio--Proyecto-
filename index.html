@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porfolio Pablo Martín</title>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <section id="about">
+        <div class="about">
+          <h1>Pablo Martín López</h1>
+          <p>
+            Soy <span>Pablo Martin</span>, un apasionado del desarrollo web con
+            un enfoque especializado en el backend. Mi experiencia se centra en
+            la creación de soluciones robustas y eficientes que impulsan el
+            funcionamiento de aplicaciones web desde el lado del servidor.
+          </p>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#proyectos">proyectos</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <div class="scroll-horizontal">
+          <div class="progress-bar"></div>
+
+          <div class="content">
+            <!-- Contenido que se extenderá horizontalmente -->
+            <div id="experiencia" class="item">
+              <ul>
+                <li>Practicas</li>
+                <li>alfinf</li>
+              </ul>
+            </div>
+            <div id="proyectos" class="item">proyectos</div>
+            <div id="habilidades" class="item">habilidades</div>
+            <div id="contacto" class="item">contacto</div>
+            <!-- Agrega más elementos según sea necesario -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+
+<script>
+  document.querySelectorAll(".content a").forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        const scrollContainer = document.getElementById("scrollContainer");
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const targetRect = targetElement.getBoundingClientRect();
+
+        let targetLeftRelativeToContainer =
+          targetRect.left - containerRect.left;
+        let targetRightRelativeToContainer =
+          targetRect.right - containerRect.left;
+
+        if (targetRightRelativeToContainer > containerRect.width) {
+          // Si el elemento objetivo está fuera de la vista a la derecha, centrarlo en la vista
+          const scrollAmount =
+            targetRightRelativeToContainer -
+            containerRect.width +
+            scrollContainer.scrollLeft;
+          scrollContainer.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth",
+          });
+        } else if (targetLeftRelativeToContainer < 0) {
+          // Si el elemento objetivo está fuera de la vista a la izquierda, centrarlo en la vista
+          const scrollAmount =
+            targetLeftRelativeToContainer + scrollContainer.scrollLeft;
+          scrollContainer.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth",
+          });
+        }
+      }
+    });
+  });
+
+  const scrollContainer = document.querySelector(".scroll-horizontal");
+
+  scrollContainer.addEventListener("scroll", () => {
+    const scrollPercentage =
+      (scrollContainer.scrollLeft /
+        (scrollContainer.scrollWidth - scrollContainer.clientWidth)) *
+      100;
+    const progressBar = document.querySelector(".progress-bar");
+    progressBar.style.width = `${scrollPercentage}%`;
+  });
+</script>
