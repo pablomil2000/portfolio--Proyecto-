@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Porfolio Pablo Martín</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./css/devStyle.css" />
+    <link rel="stylesheet" href="./assets/css/devStyle.css" />
   </head>
   <body>
     <!-- Alerta site building -->
@@ -28,7 +28,8 @@
             Soy <span>Pablo Martin</span>, un apasionado del desarrollo web con
             un enfoque especializado en el backend. Mi experiencia se centra en
             la creación de soluciones robustas y eficientes que impulsan el
-            funcionamiento de aplicaciones web desde el lado del servidor.
+            funcionamiento de aplicaciones web desde el lado del servidor y
+            cliente.
           </p>
         </div>
         <div class="menu">
@@ -48,10 +49,30 @@
             <!-- Contenido que se extenderá horizontalmente -->
             <div id="experiencia" class="item">
               <ul>
-                <li>Practicas</li>
-                <li>alfinf</li>
+                <li>
+                  <div class="experiencia-item">
+                    <h3>Alfinf</h3>
+                    <p>
+                      Programador informatico desarrollando de aplicación de
+                      gestión para cooperativas agrícolas con el ERP de odoo y
+                      Microsoft access y migrando aplicaciones a Odoo.
+                    </p>
+                    <h5>Diciembre 2023 - Actualidad</h5>
+                  </div>
+                </li>
+                <li>
+                  <div class="experiencia-item">
+                    <h3>Practicas</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Quisquam, quos.
+                    </p>
+                    <h5>Marzo 2023 - Junio 2023</h5>
+                  </div>
+                </li>
               </ul>
             </div>
+
             <div id="proyectos" class="item">proyectos</div>
             <div id="habilidades" class="item">habilidades</div>
             <div id="contacto" class="item">contacto</div>
@@ -63,55 +84,4 @@
   </body>
 </html>
 
-<script>
-  document.querySelectorAll(".content a").forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        const scrollContainer = document.getElementById("scrollContainer");
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const targetRect = targetElement.getBoundingClientRect();
-
-        let targetLeftRelativeToContainer =
-          targetRect.left - containerRect.left;
-        let targetRightRelativeToContainer =
-          targetRect.right - containerRect.left;
-
-        if (targetRightRelativeToContainer > containerRect.width) {
-          // Si el elemento objetivo está fuera de la vista a la derecha, centrarlo en la vista
-          const scrollAmount =
-            targetRightRelativeToContainer -
-            containerRect.width +
-            scrollContainer.scrollLeft;
-          scrollContainer.scrollBy({
-            left: scrollAmount,
-            behavior: "smooth",
-          });
-        } else if (targetLeftRelativeToContainer < 0) {
-          // Si el elemento objetivo está fuera de la vista a la izquierda, centrarlo en la vista
-          const scrollAmount =
-            targetLeftRelativeToContainer + scrollContainer.scrollLeft;
-          scrollContainer.scrollBy({
-            left: scrollAmount,
-            behavior: "smooth",
-          });
-        }
-      }
-    });
-  });
-
-  const scrollContainer = document.querySelector(".scroll-horizontal");
-
-  scrollContainer.addEventListener("scroll", () => {
-    const scrollPercentage =
-      (scrollContainer.scrollLeft /
-        (scrollContainer.scrollWidth - scrollContainer.clientWidth)) *
-      100;
-    const progressBar = document.querySelector(".progress-bar");
-    progressBar.style.width = `${scrollPercentage}%`;
-  });
-</script>
+<script src="./assets/js/main.js"></script>
